@@ -54,8 +54,8 @@ class MyHomePageState extends State<MyHomePage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(450.0),
         child: AppBar(
-          flexibleSpace: Image.asset('lib/assets/images/aws-lego-banner.jpeg',
-              fit: BoxFit.fitWidth),
+          flexibleSpace:
+              Image.asset('images/aws-lego-banner.jpeg', fit: BoxFit.fitWidth),
           //'../web/assets/images/aws-lego-banner.jpeg'
           //Text(widget.title),
         ),

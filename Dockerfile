@@ -24,8 +24,14 @@ RUN flutter config --enable-web
 RUN mkdir /app/
 COPY . /app/
 WORKDIR /app/
-RUN flutter run -d web
+RUN flutter pub get
+RUN flutter build web
 
 # Document the exposed port
 EXPOSE 8080
-ENTRYPOINT ["/usr/lib/dart/bin/dart", "/app/bin/server.dart"]
+
+# Set the server startup script as executable
+RUN ["chmod", "+x", "/app/server/server.sh"]
+
+# Start the web server
+ENTRYPOINT [ "/app/server/server.sh" ]
