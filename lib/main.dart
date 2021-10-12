@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +42,9 @@ class MyHomePageState extends State<MyHomePage> {
 
   void _decrementCounter() {
     setState(() {
-      counter--;
+      if (counter > 0) {
+        counter--;
+      }
     });
   }
 
@@ -51,103 +55,129 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/lego_background.jpeg"),
-                fit: BoxFit.fill,
+      body: RawKeyboardListener(
+        focusNode: FocusNode(),
+        onKey: (RawKeyEvent event) {
+          if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
+              event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+            _incrementCounter();
+          }
+
+          if (event.isKeyPressed(LogicalKeyboardKey.backspace)) {
+            _decrementCounter();
+          }
+        },
+        autofocus: true,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/lego_background.jpeg"),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Number of defects:',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                      ),
-                    ),
-                    Text(
-                      '$counter',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsets>(
-                              const EdgeInsets.all(20)),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Number of defects:',
+                        style: TextStyle(
+                          fontSize: 40.0,
                         ),
-                        child: const Text(
-                          '-1',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        onPressed: _decrementCounter,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsets>(
-                              const EdgeInsets.all(20)),
-                        ),
-                        child: const Text(
-                          '+1',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        onPressed: _incrementCounter,
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.all(20)),
-                    ),
-                    child: const Text(
-                      'End the session!',
-                      style: TextStyle(
-                        fontSize: 20.0,
+                      Text(
+                        '$counter',
+                        style: Theme.of(context).textTheme.headline3,
                       ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SecondRoute()),
-                      );
-                    },
+                    ],
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  //child: StepperTouch(),
-                ),
-              ],
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ElevatedButton.icon(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                                const EdgeInsets.all(20)),
+                          ),
+                          label: const Text(
+                            'Revert',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          onPressed: _decrementCounter,
+                          icon: const Icon(Icons.backspace),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(10.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ElevatedButton.icon(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                                const EdgeInsets.all(20)),
+                          ),
+                          label: const Text(
+                            'Defect!',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          onPressed: _incrementCounter,
+                          icon: const Icon(Icons.sentiment_very_dissatisfied),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.all(20)),
+                      ),
+                      label: const Text(
+                        'End',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SecondRoute()),
+                        );
+                      },
+                      icon: const Icon(Icons.published_with_changes),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    //child: StepperTouch(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: resetCount,
