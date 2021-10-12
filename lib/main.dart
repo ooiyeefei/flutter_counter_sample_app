@@ -50,99 +50,104 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var scaffold = Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(450.0),
-        child: AppBar(
-          flexibleSpace:
-              Image.asset('images/aws-lego-banner.jpeg', fit: BoxFit.fitWidth),
-          //'../web/assets/images/aws-lego-banner.jpeg'
-          //Text(widget.title),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              children: [
-                const Text(
-                  'Number of defects:',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
-                ),
-                Text(
-                  '$counter',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.all(20)),
-                    ),
-                    child: const Text(
-                      '-1',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    onPressed: _decrementCounter,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.all(20)),
-                    ),
-                    child: const Text(
-                      '+1',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    onPressed: _incrementCounter,
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(25),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  padding:
-                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(20)),
-                ),
-                child: const Text(
-                  'End the session!',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SecondRoute()),
-                  );
-                },
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/lego_background.jpeg"),
+                fit: BoxFit.fill,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              //child: StepperTouch(),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Number of defects:',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                    Text(
+                      '$counter',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              const EdgeInsets.all(20)),
+                        ),
+                        child: const Text(
+                          '-1',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        onPressed: _decrementCounter,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              const EdgeInsets.all(20)),
+                        ),
+                        child: const Text(
+                          '+1',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        onPressed: _incrementCounter,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          const EdgeInsets.all(20)),
+                    ),
+                    child: const Text(
+                      'End the session!',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SecondRoute()),
+                      );
+                    },
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  //child: StepperTouch(),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: resetCount,
@@ -150,7 +155,6 @@ class MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.refresh),
       ),
     );
-    return scaffold;
   }
 }
 
