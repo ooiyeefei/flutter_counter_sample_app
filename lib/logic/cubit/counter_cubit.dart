@@ -11,6 +11,7 @@ class CounterCubit extends Cubit<CounterState> with HydratedMixin {
 
   @override
   CounterState fromJson(Map<String, dynamic> json) {
+    // ignore: unnecessary_null_comparison
     if (json != null) {
       return CounterState.fromMap(json);
     }

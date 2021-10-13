@@ -53,6 +53,7 @@ class _Stepper2State extends State<StepperTouch>
     var d = 55.0;
     var e = 12.0;
     return FittedBox(
+      // ignore: sized_box_for_whitespace
       child: Container(
         width: d.w,
         height: e.h,
@@ -142,7 +143,7 @@ class _Stepper2State extends State<StepperTouch>
     }
 
     final SpringDescription _kDefaultSpring =
-        new SpringDescription.withDampingRatio(
+        SpringDescription.withDampingRatio(
       mass: 0.9,
       stiffness: 250.0,
       ratio: 0.6,
