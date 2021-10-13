@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:counter_app/screens/home.dart';
+import 'package:nanoid/nanoid.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var result = MyHomePageState.counter;
+    var result = MyHomePageState.userCount;
+    var id = MyHomePageState.id;
+    var machineCount = MyHomePageState.machineCount;
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -52,7 +56,7 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Placeholder',
+                          '$id count = $machineCount',
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ],
@@ -66,8 +70,17 @@ class ResultScreen extends StatelessWidget {
                       padding: MaterialStateProperty.all<EdgeInsets>(
                           const EdgeInsets.all(20)),
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
+                    onPressed: () async {
+                      MyHomePageState.counter = 0;
+                      MyHomePageState.id =
+                          int.parse(customAlphabet('1234567890', 10));
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyHomePage(
+                              title: 'Re:Invent 2021 Finding Lego'),
+                        ),
+                      );
                     },
                     label: const Text(
                       'Restart',
