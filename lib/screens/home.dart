@@ -1,10 +1,8 @@
-import 'package:counter_app/screens/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:dio/dio.dart';
 import 'dart:async';
-import 'dart:convert';
 
 // class SessionResult {
 //   static int id = 0;
@@ -39,6 +37,7 @@ class MyHomePageState extends State<MyHomePage> {
   static int counter = 0;
   static int userCount = 0;
   static int machineCount = 0;
+  static bool processComplete = false;
   static var id = int.parse(customAlphabet('1234567890', 10));
 
   void _incrementCounter() {
@@ -59,6 +58,14 @@ class MyHomePageState extends State<MyHomePage> {
     setState(() {
       counter = 0;
       id = int.parse(customAlphabet('1234567890', 10));
+    });
+  }
+
+  void updateFromResponse(Response response) {
+    setState(() {
+      machineCount = response.data['machine_count'];
+      userCount = response.data['user_count'];
+      processComplete = true;
     });
   }
 
@@ -96,12 +103,7 @@ class MyHomePageState extends State<MyHomePage> {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      print(response.data['user_count']);
-      setState(() {
-        machineCount = response.data['machine_count'];
-        userCount = response.data['user_count'];
-      });
-      print(userCount);
+      updateFromResponse(response);
       // return SessionResult.fromJson(jsonDecode(response.data));
     } else {
       // If the server did not return a 200 OK response,
@@ -227,12 +229,9 @@ class MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       onPressed: () async {
-                        updateDdb(id, counter);
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ResultScreen()),
-                        );
+                        await updateDdb(id, counter);
+                        // await Future.delayed(const Duration(milliseconds: 800));
+                        Navigator.pushNamed(context, '/result');
                       },
                       icon: const Icon(Icons.published_with_changes),
                     ),

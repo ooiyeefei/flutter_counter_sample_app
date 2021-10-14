@@ -1,5 +1,7 @@
+import 'package:counter_app/screens/loading.dart';
 import 'package:counter_app/screens/result.dart';
 import 'package:counter_app/screens/home.dart';
+import 'package:counter_app/screens/transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
@@ -22,7 +24,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) =>
             const MyHomePage(title: 'Re:Invent 2021 Finding Lego'),
-        '/result': (context) => const ResultScreen(),
+        '/result': (context) => ResultScreen(
+              userCount: MyHomePageState.userCount,
+            ),
+        '/loading': (context) => LoadingView(),
+        '/transition': (context) =>
+            TransitionView(processComplete: MyHomePageState.processComplete),
       },
     );
   }

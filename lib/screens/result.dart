@@ -3,11 +3,11 @@ import 'package:counter_app/screens/home.dart';
 import 'package:nanoid/nanoid.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({Key? key}) : super(key: key);
+  final int userCount;
+  const ResultScreen({Key? key, required this.userCount}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var result = MyHomePageState.userCount;
     var id = MyHomePageState.id;
     var machineCount = MyHomePageState.machineCount;
 
@@ -39,7 +39,7 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '$result',
+                          '$userCount',
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ],
