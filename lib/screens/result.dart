@@ -74,6 +74,8 @@ class ResultScreen extends StatelessWidget {
                       MyHomePageState.counter = 0;
                       MyHomePageState.id =
                           int.parse(customAlphabet('1234567890', 10));
+                      MyHomePageState().createNewDdbEntry(
+                          MyHomePageState.id, MyHomePageState.counter);
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
