@@ -28,7 +28,8 @@ class ResultScreen extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/lego_background_result.jpeg"),
+                image: NetworkImage(
+                    "https://d1sb2anak0ziro.cloudfront.net/lego_background_result.jpeg"),
                 fit: BoxFit.fill,
               ),
             ),
