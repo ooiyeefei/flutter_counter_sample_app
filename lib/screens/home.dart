@@ -135,6 +135,16 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: Container(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          '$id',
+          style: const TextStyle(
+            fontSize: 12.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
       body: RawKeyboardListener(
         focusNode: FocusNode(),
         onKey: (RawKeyEvent event) {
@@ -166,15 +176,6 @@ class MyHomePageState extends State<MyHomePage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'session id: $id',
-                        style: const TextStyle(
-                          fontSize: 40.0,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                      ),
                       const Text(
                         'Number of defects:',
                         style: TextStyle(

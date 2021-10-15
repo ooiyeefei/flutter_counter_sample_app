@@ -12,6 +12,16 @@ class ResultScreen extends StatelessWidget {
     var machineCount = MyHomePageState.machineCount;
 
     return Scaffold(
+      bottomSheet: Container(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          '$id',
+          style: const TextStyle(
+            fontSize: 12.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -56,7 +66,7 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '$id count = $machineCount',
+                          '$machineCount',
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ],
@@ -64,7 +74,7 @@ class ResultScreen extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.all(100),
+                  padding: const EdgeInsets.all(50),
                   child: ElevatedButton.icon(
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all<EdgeInsets>(
@@ -96,6 +106,21 @@ class ResultScreen extends StatelessWidget {
               ],
             ),
           ),
+          // Stack(
+          //   alignment: AlignmentDirectional.bottomCenter,
+          //   children: [
+          //     Column(
+          //       children: [
+          //         Text(
+          //           '$id',
+          //           style: const TextStyle(
+          //             fontSize: 12.0,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
