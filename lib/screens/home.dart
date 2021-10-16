@@ -166,7 +166,7 @@ class MyHomePageState extends State<MyHomePage> {
                 image: DecorationImage(
                   image: NetworkImage(
                       'https://d1sb2anak0ziro.cloudfront.net/lego_background.jpeg'),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
