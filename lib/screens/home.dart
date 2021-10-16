@@ -73,7 +73,7 @@ class MyHomePageState extends State<MyHomePage> {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
       var customHeaders = {
-        'request-source': 'application/flutter'
+        'request-source': 'application/flutter',
         // other headers
       };
       options.headers.addAll(customHeaders);
@@ -105,7 +105,7 @@ class MyHomePageState extends State<MyHomePage> {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
       var customHeaders = {
-        'request-source': 'application/flutter'
+        'request-source': 'application/flutter',
         // other headers
       };
       options.headers.addAll(customHeaders);
