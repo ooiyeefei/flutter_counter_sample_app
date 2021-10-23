@@ -132,6 +132,36 @@ class MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> closeActiveDdbSession() async {
+    var dio = Dio();
+    dio.interceptors
+        .add(InterceptorsWrapper(onRequest: (options, handler) async {
+      var customHeaders = {
+        'request-source': 'application/flutter/close',
+        // other headers
+      };
+      options.headers.addAll(customHeaders);
+      return handler.next(options);
+    }));
+
+    Response response = await dio.post(
+        'https://jfcdnq64m6.execute-api.us-east-1.amazonaws.com/prod/flutter',
+        data: {
+          'isActive': false,
+        });
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      print("successfully close existing active session");
+      // return SessionResult.fromJson(jsonDecode(response.data));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to update DDB.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -268,7 +298,10 @@ class MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: resetCount,
+        onPressed: () {
+          closeActiveDdbSession();
+          resetCount();
+        },
         tooltip: 'Reset',
         child: const Icon(Icons.refresh),
       ),

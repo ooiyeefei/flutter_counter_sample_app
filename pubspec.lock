@@ -158,6 +158,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  gradient_widgets:
+    dependency: "direct main"
+    description:
+      name: gradient_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0"
   hive:
     dependency: transitive
     description:

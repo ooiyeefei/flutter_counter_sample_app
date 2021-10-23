@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/loading',
       routes: {
         '/': (context) =>
             const MyHomePage(title: 'Re:Invent 2021 Finding Lego'),

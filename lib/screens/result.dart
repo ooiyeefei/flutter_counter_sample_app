@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:counter_app/screens/home.dart';
-import 'package:nanoid/nanoid.dart';
 
 class ResultScreen extends StatelessWidget {
   final int userCount;
@@ -82,18 +81,12 @@ class ResultScreen extends StatelessWidget {
                           const EdgeInsets.all(20)),
                     ),
                     onPressed: () async {
-                      MyHomePageState.counter = 0;
-                      MyHomePageState.id =
-                          int.parse(customAlphabet('1234567890', 10));
-                      MyHomePageState().createNewDdbEntry(
-                          MyHomePageState.id, MyHomePageState.counter);
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyHomePage(
-                              title: 'Re:Invent 2021 Finding Lego'),
-                        ),
-                      );
+                      // MyHomePageState.counter = 0;
+                      // MyHomePageState.id =
+                      //     int.parse(customAlphabet('1234567890', 10));
+                      // MyHomePageState().createNewDdbEntry(
+                      //     MyHomePageState.id, MyHomePageState.counter);
+                      await Navigator.pushNamed(context, '/loading');
                     },
                     label: const Text(
                       'Restart',
