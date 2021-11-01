@@ -40,17 +40,14 @@ class MyHomePageState extends State<MyHomePage> {
   static var id = int.parse(customAlphabet('1234567890', 10));
 
   final FocusNode _focusNode = FocusNode();
-  // late FocusAttachment _nodeAttachment;
+  late FocusAttachment _nodeAttachment;
 
   @override
   void initState() {
     super.initState();
     //widget.focusNode = FocusNode(debugLabel: 'Button');
     // widget.focusNode.addListener(_handleFocusChange);
-    // _nodeAttachment = _focusNode.attach(
-    //   context,
-    //   onKey: _handleKeyPressed,
-    // );
+    _nodeAttachment = _focusNode.attach(context, onKey: _handleKeyPressed);
   }
 
   void _incrementCounter() {
@@ -177,20 +174,19 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   //Handle when keyPressed
-  _handleKeyPressed(FocusNode _focusNode, RawKeyEvent event) {
-    if (event is RawKeyDownEvent) {
-      if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
-          event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
-        _incrementCounter();
-        // return KeyEventResult.handled;
-      }
-
-      if (event.isKeyPressed(LogicalKeyboardKey.backspace)) {
-        _decrementCounter();
-        // return KeyEventResult.handled;
-      }
+  KeyEventResult _handleKeyPressed(FocusNode _focusNode, RawKeyEvent event) {
+    print("does it handle key pressed?");
+    if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
+        event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+      _incrementCounter();
+      return KeyEventResult.handled;
     }
-    // return KeyEventResult.ignored;
+
+    if (event.isKeyPressed(LogicalKeyboardKey.backspace)) {
+      _decrementCounter();
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
   }
 
   _buildDefectButton() {
@@ -200,10 +196,7 @@ class MyHomePageState extends State<MyHomePage> {
       focusNode: _focusNode,
       autofocus: true,
       onKey: (RawKeyEvent event) => {
-        if (event is RawKeyDownEvent)
-          {
-            _handleKeyPressed(_focusNode, event),
-          }
+        _handleKeyPressed(_focusNode, event),
       },
       child: ElevatedButton.icon(
         style: ButtonStyle(

@@ -10,6 +10,12 @@ class ResultScreen extends StatelessWidget {
     var id = MyHomePageState.id;
     var machineCount = MyHomePageState.machineCount;
 
+    precacheImage(
+      const NetworkImage(
+          'https://d1sb2anak0ziro.cloudfront.net/lego_background_result.jpeg'),
+      context,
+    );
+
     return Scaffold(
       bottomSheet: Container(
         padding: EdgeInsets.all(5.0),

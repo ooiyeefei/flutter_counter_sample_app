@@ -55,6 +55,12 @@ class _LoadingViewState extends State<LoadingView> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(
+      const NetworkImage(
+          'https://d1sb2anak0ziro.cloudfront.net/lego_background.jpeg'),
+      context,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
